@@ -1,4 +1,4 @@
-import { StyleSheet, StatusBar } from 'react-native'
+import { StatusBar } from 'react-native'
 import {
   useFonts,
   Inter_400Regular,
