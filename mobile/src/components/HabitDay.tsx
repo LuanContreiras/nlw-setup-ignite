@@ -3,7 +3,7 @@ import {
   Dimensions,
   TouchableOpacityProps
 } from 'react-native'
-import { GenerateProgressPercentage } from '../utils/generate-progress-percentage'
+import { generateProgressPercentage } from '../utils/generate-progress-percentage'
 import clsx from 'clsx'
 import dayjs from 'dayjs'
 
@@ -15,9 +15,9 @@ export const DAY_SIZE =
   Dimensions.get('screen').width / WEEK_DAYS - (SCREEN_HORIZONTAL_PADDING + 5)
 
 interface Props extends TouchableOpacityProps {
-  amountOfHabits?: number
-  amountCompleted?: number
-  date: Date
+  amountOfHabits?: number;
+  amountCompleted?: number;
+  date: Date;
 }
 
 export function HabitDay({
@@ -28,8 +28,8 @@ export function HabitDay({
 }: Props) {
   const amountAccomplishedPercentage =
     amountOfHabits > 0
-      ? GenerateProgressPercentage(amountOfHabits, amountCompleted)
-      : 0
+      ? generateProgressPercentage(amountOfHabits, amountCompleted)
+      : 0;
 
   const today = dayjs().startOf('day').toDate();
   const isCurrentDay = dayjs(date).isSame(today)
@@ -40,15 +40,15 @@ export function HabitDay({
         ['bg-violet-900 border-violet-700']:
           amountAccomplishedPercentage > 0 && amountAccomplishedPercentage < 20,
         ['bg-violet-800 border-violet-600']:
-          amountAccomplishedPercentage > 20 &&
+          amountAccomplishedPercentage >= 20 &&
           amountAccomplishedPercentage < 40,
         ['bg-violet-700 border-violet-500']:
-          amountAccomplishedPercentage > 40 &&
+          amountAccomplishedPercentage >= 40 &&
           amountAccomplishedPercentage < 60,
         ['bg-violet-600 border-violet-500']:
-          amountAccomplishedPercentage > 60 &&
+          amountAccomplishedPercentage >= 60 &&
           amountAccomplishedPercentage < 80,
-        ['bg-violet-500 border-violet-400']: amountAccomplishedPercentage > 80,
+        ['bg-violet-500 border-violet-400']: amountAccomplishedPercentage >= 80,
         ['border-white border-4']: isCurrentDay,
       })}
       style={{ width: DAY_SIZE, height: DAY_SIZE }}
